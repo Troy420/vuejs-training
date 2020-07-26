@@ -1,0 +1,137 @@
+
+
+
+
+
+
+
+
+
+.big-box{
+  background: white;
+  margin: 130px auto;
+  min-width: 300px;
+  max-width: 600px;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0, 0.2);
+  display: block;
+}
+
+.header {
+  font-size: 4rem;
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  padding: 20px 0px;
+  text-align: center;
+  background: #f5f5f5;
+  margin-bottom: 0;
+}
+
+.todo-header{
+  display: flex;
+  align-items: center;
+  padding:10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.inputClass{
+  border: none;
+  font-size: 30px;
+  padding: 10px;
+  width: 100%;
+  background-color: white;
+}
+
+.inputClass:focus {
+  border:none;
+  outline: 0;
+}
+
+.todo-element {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+  font-weight: 500;
+}
+
+.todo-element.done{
+  color: #cccccc;
+  text-decoration: line-through;
+}
+
+.todo-element:hover .delete-btn{
+  display: inline;
+}
+
+.todo{
+  width: 100%;
+  padding: 10px;
+}
+
+.todo-box-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 10px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+}
+
+.action {
+  margin: auto 5px;
+  border: 1px solid transparent;
+  padding: 4px 6px;
+  user-select: none;
+  border-radius: 2px;
+}
+
+.action:hover {
+  border: 1px solid #ff000027;
+  cursor: pointer;
+}
+
+.action.active {
+  border: 1px solid #ff000027;
+  cursor: pointer;
+}
+
+.delete-btn{
+  background-color: beige;
+  border-radius: 50%;
+  padding: 5px;
+  width: 13px;
+  height: 13px;
+  text-align: center;
+  line-height: 10px;
+  color: red;
+  cursor: pointer;
+  display: none;
+
+  position: absolute;
+  left: 78%;
+}
+
+input[type="checkbox" i] {
+  width: 20px;
+  height: 20px;
+  margin-right: 14px;
+}
+
+.todo-header input[type="checkbox" i]{
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+.clean-done {
+  user-select: none;
+  cursor: pointer;
+}
+
+.todo-box.many {
+  box-shadow: 0 1 px 1px rgba(0,0,0, 0.2), 0 8px 0 -3px;
+}
+

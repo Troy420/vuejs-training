@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todos</title>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <section id="app" class="big-box">
+    <h1 class="header">
+      Todos
+    </h1>
+
+    <div class="todo-box">
+      <div class="todo-header">
+        <input type="checkbox" class="toggle-all" v-model="isAllDone" @click="setAllDone">
+        <input type="text" class="inputClass" v-model="todoText" placeholder="What's ur plan?" @keyup.enter="addTodo" autofocus>
+      </div>
+ 
+      <div class="todo-element-box">
+        <div class="todo-element" v-for="(todo, index) in todoOption" :key="index" :class="{done: todo.done}">
+          <input type="checkbox" class="toggle" v-model="todo.done">
+          <div class="todo">
+            {{ todo.text | capitalize }}
+          </div>
+          <span class="delete-btn" @click="removeElement(index)">x</span>
+        </div>
+      </div>
+
+      <div class="todo-box-footer">
+        <div class="remain">
+          Incomplete: {{ getIncomplete }} 
+        </div>
+        <div class="actions">
+          <div class="action" @click="action = 'all'" :class="{active: action === 'all'}">
+            All
+          </div>
+          <div class="action" @click="action = 'active'">
+            Active
+          </div>
+          <div class="action" @click="action = 'completed'">
+            Completed
+          </div>
+        </div>
+
+        <div class="clean-done" @click="removeComplete">
+          Clear completed tasks
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    Vue.component("todo-list", {
+      props: ['todo'],
+      template: "<div>{{ todo.text | capitalize }}</div>",
+      filters: {
+        capitalize: function(val){
+          return val.toUpperCase()
+        }
+      },
+
+    });
+
+    var app = new Vue({
+      el: "#app",
+      data: {
+        todoText: "",
+        todos: [
+          {
+            text: "Task 1",
+            done: false
+          }, 
+          {
+            text: "Task 2",
+            done: true
+          }, 
+        ],
+        action: "all",
+        isAllDone: false,
+
+      },
+      methods: {
+        addTodo: function() {
+          if(this.todoText == ""){
+            alert("Empty field")
+          }else{
+            this.todos.push({
+            text: this.todoText,
+            done: false
+          });
+          }
+          
+          this.todoText = ""
+        },
+        removeElement: function(index){
+          this.todos.splice(index,1)
+        },
+        removeComplete: function(){
+          this.todos = this.todos.filter((todo) => !todo.done)
+          
+        },
+        setAllDone: function(){
+          for (let index = 0; index < this.todos.length; index++) {
+            this.todos[index].done = true;
+            
+          }
+        }
+      },
+      computed: {
+        getSize: function() {
+          return this.todos.length;
+        },
+        getIncomplete: function(){
+          let incompleteTodo = this.todos.filter((todo) => !todo.done)
+          return incompleteTodo.length
+        },
+        todoOption: function(){
+          if( this.action === "all"){
+            return this.todos
+          }else if (this.action === "active"){
+            return this.todos.filter((todo) => !todo.done) 
+          }else if(this.action === "completed"){
+            return this.todos.filter((todo) => todo.done) 
+          }
+        },
+        
+      },
+      filters: {
+        capitalize: function(val){
+          return val.toUpperCase()
+        },
+        plurals: function(n) {
+          return n < 2 ? "task": "tasks"
+        }
+      },
+      
+    })
+  </script>
+</body>
+</html>
